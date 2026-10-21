@@ -374,25 +374,8 @@ html:not(.js) .ch>i{transform:none}
 .filters button:hover{border-color:var(--c-bg-primary);transform:translateY(-2px)}
 .filters button.on{background:var(--c-bg-primary);color:var(--c-brand-primary);border-color:var(--c-bg-primary);text-shadow:0 0 10px rgba(246,183,60,.6)}
 .gal__intro{max-width:62ch;margin-bottom:clamp(26px,3.4vw,44px);font-size:1rem;line-height:1.55;color:rgba(14,14,16,.75)}
-/* Gallery band: the gallery photos on a curved row (ends bend toward you and fade). Built by the "gallery band" script near the end of the page.
-   Every length inside is a multiple of --gb-u (one tile height, set by the script). To switch it off, add `hidden` to <div id="gband">. */
-.gband{position:relative;container-type:size;height:clamp(280px,34vw,460px);margin-bottom:clamp(26px,3.4vw,44px);border-radius:14px;overflow:hidden;isolation:isolate;
-  background:radial-gradient(55% 75% at 50% 52%,rgba(246,183,60,.16),rgba(246,183,60,0) 72%),var(--c-bg-primary)}
-.gband[hidden]{display:none}
-.gband__stage{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.gband.is-ready .gband__stage{opacity:1}
-.gband__tile{position:absolute;transform-style:preserve-3d;animation:gband-orbit var(--gb-dur,20s) linear infinite}
-.gband__strip{position:absolute;top:0;overflow:hidden;background:#1b1b1f}
-.gband__strip:first-child{border-radius:8px 0 0 8px}
-.gband__strip:last-child{border-radius:0 8px 8px 0}
-.gband__strip img{position:absolute;top:0;max-width:none;object-fit:cover}
-/* Paused (not removed) when off-screen or for reduced motion: every tile is already placed by its negative delay, so it holds as a finished still. */
-.gband.is-off .gband__tile{animation-play-state:paused}
-@media (prefers-reduced-motion:reduce){.gband__tile{animation-play-state:paused}}
-/* Gallery grid: 4 columns (3 tablet, 2 phone). Only the first 12 show until "Show all"; a filter always shows every match. */
-.ggrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.4vw,20px)}
-.ggrid[data-collapsed] .gcard:nth-child(n+13){display:none}
+/* Gallery grid: 4 columns (3 tablet, 2 phone). Every photo shows; a filter narrows them. */
+.ggrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.4vw,20px);margin-bottom:clamp(70px,9vw,120px)}
 .gcard{position:relative;display:block;aspect-ratio:3/4;border-radius:10px;overflow:hidden;isolation:isolate;text-align:left;background:#111;color:#F5F1E8;
   box-shadow:0 18px 36px -24px rgba(14,14,16,.6);transition:box-shadow .5s}
 .gcard[hidden]{display:none}
@@ -403,10 +386,6 @@ html:not(.js) .ch>i{transform:none}
 .gcard::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(14,14,16,0) 50%,rgba(14,14,16,.88) 100%)}
 .gcard__meta{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:14px 14px 13px;font-size:.72rem;line-height:1.3;color:#fff}
 .gcard__meta b{display:block;margin-bottom:4px;font-weight:500;font-size:.64rem;letter-spacing:.1em;color:var(--c-brand-primary);text-shadow:0 0 10px rgba(246,183,60,.7)}
-.gal__more{display:flex;justify-content:center;margin:clamp(26px,3.4vw,44px) 0 clamp(70px,9vw,120px)}
-.gal__more[hidden]{display:none}
-.ggrid:not([data-collapsed]){margin-bottom:clamp(70px,9vw,120px)}
-.ggrid[data-collapsed]{margin-bottom:0}
 /* Lightbox */
 .lb{position:fixed;inset:0;z-index:300;display:grid;grid-template-rows:minmax(0,1fr) auto;justify-items:center;padding:clamp(56px,6vw,70px) clamp(14px,3vw,36px) clamp(16px,2.4vw,28px);
   background:rgba(10,10,12,.95);opacity:0;visibility:hidden;transition:opacity .35s,visibility 0s .35s}
@@ -820,8 +799,7 @@ html:not(.js) .ch>i{transform:none}
       <h2 class="rv">Gallery</h2>
     </div>
     <p class="gal__intro rv">Real projects. Careful finishes. A growing collection of domestic and commercial work — from lighting and consumer units to EV charging, outdoor power and larger installations. Tap any photograph to view it larger.</p>
-    <div class="gband is-off rv" id="gband" aria-hidden="true"><div class="gband__stage"></div></div>
-    <div class="ggrid" id="ggrid" data-collapsed>
+    <div class="ggrid" id="ggrid">
       <button class="gcard rv" type="button" data-c="lighting domestic" data-full="images/gallery/g01.jpg" data-cap="Colour-changing LED strip lighting through a kitchen and living space." data-kick="Feature lighting" data-title="Colour-changing kitchen LEDs"><span class="gcard__img"><img src="images/gallery/t01.jpg" alt="Green LED strip lighting installed through a long kitchen interior" loading="lazy" decoding="async"></span><span class="gcard__meta mono"><b>Feature lighting</b>Colour-changing kitchen LEDs</span></button>
       <button class="gcard rv" type="button" data-c="lighting domestic" data-full="images/gallery/g02.jpg" data-cap="The same colour-changing LED installation shown in blue." data-kick="Feature lighting" data-title="Blue kitchen LED setting"><span class="gcard__img"><img src="images/gallery/t02.jpg" alt="Blue LED strip lighting installed through a long kitchen interior" loading="lazy" decoding="async"></span><span class="gcard__meta mono"><b>Feature lighting</b>Blue kitchen LED setting</span></button>
       <button class="gcard rv" type="button" data-c="lighting commercial" data-full="images/gallery/g03.jpg" data-cap="Honeycomb feature lighting installed at a commercial vehicle workshop." data-kick="Commercial lighting" data-title="Workshop honeycomb lights"><span class="gcard__img"><img src="images/gallery/t03.jpg" alt="Honeycomb LED lighting installed in a commercial vehicle workshop entrance" loading="lazy" decoding="async"></span><span class="gcard__meta mono"><b>Commercial lighting</b>Workshop honeycomb lights</span></button>
@@ -848,7 +826,6 @@ html:not(.js) .ch>i{transform:none}
       <button class="gcard rv" type="button" data-c="lighting domestic" data-full="images/gallery/g24.jpg" data-cap="Recessed ceiling spots and decorative wall lights across a larger room." data-kick="Interior lighting" data-title="Spotlights and wall lights"><span class="gcard__img"><img src="images/gallery/t24.jpg" alt="Large finished room with recessed spotlights and decorative wall lights" loading="lazy" decoding="async"></span><span class="gcard__meta mono"><b>Interior lighting</b>Spotlights and wall lights</span></button>
       <button class="gcard rv" type="button" data-c="lighting domestic" data-full="images/gallery/g25.jpg" data-cap="A completed room showing recessed lighting, wall lights and black accessories." data-kick="Finished interior" data-title="Lighting and black accessories"><span class="gcard__img"><img src="images/gallery/t25.jpg" alt="Finished room with recessed spots, wall lights and black electrical accessories" loading="lazy" decoding="async"></span><span class="gcard__meta mono"><b>Finished interior</b>Lighting and black accessories</span></button>
     </div>
-    <div class="gal__more"><button class="pill pill--lg" id="gmore" type="button">Show all 25 photos</button></div>
   </div>
 
   <!-- Let's talk (light) -->
@@ -1419,21 +1396,14 @@ Highly recommended</p>
     track.addEventListener('scroll',ends,{passive:true}); window.addEventListener('resize',ends); ends();
   })();
 
-  /* ── gallery: filters, "show all", lightbox ── */
+  /* ── gallery: filters, lightbox ── */
   (function(){
     var grid=$('#ggrid'); if(!grid) return;
-    var cards=$$('.gcard',grid), btns=$$('.filters button'), more=$('#gmore'), filter='all', expanded=false;
+    var cards=$$('.gcard',grid), btns=$$('.filters button'), filter='all';
     function has(c,f){ return f==='all'||(' '+c.dataset.c+' ').indexOf(' '+f+' ')>-1 }   // a photo can sit in several categories
     btns.forEach(function(b){ b.textContent+=' ('+cards.filter(function(c){return has(c,b.dataset.f)}).length+')' });
-    function apply(){
-      cards.forEach(function(c){c.hidden=!has(c,filter)});
-      var collapsed=filter==='all'&&!expanded;
-      if(collapsed) grid.setAttribute('data-collapsed',''); else grid.removeAttribute('data-collapsed');
-      more.parentNode.hidden=!collapsed;
-    }
+    function apply(){ cards.forEach(function(c){c.hidden=!has(c,filter)}) }
     btns.forEach(function(b){ b.addEventListener('click',function(){ filter=b.dataset.f; btns.forEach(function(x){x.classList.toggle('on',x===b)}); apply() }) });
-    more.addEventListener('click',function(){ expanded=true; apply() });
-    apply();
 
     /* lightbox: browses whatever is currently showing (so a filter narrows the slideshow too) */
     var lb=$('#lb'), img=$('#lb-i'), count=$('#lb-c'), cap=$('#lb-cap'), list=[], cur=0, opener=null;
@@ -1457,103 +1427,6 @@ Highly recommended</p>
     });
     var sx=null; lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
     lb.addEventListener('touchend',function(e){ if(sx===null) return; var dx=e.changedTouches[0].clientX-sx; sx=null; if(Math.abs(dx)>50) step(dx<0?1:-1) },{passive:true});
-  })();
-
-  /* ── gallery band: the gallery photos on a curved row ──
-     Ported from the "Tilted Grid Hero" React component. One row streams right-to-left round the inside of a cylinder: the centre faces you,
-     the ends bend toward you and fade out. A box can't bend, so each tile is cut into SLICES vertical strips; every strip is a flat facet turned
-     its own few degrees round the cylinder's axis, and the tile (preserve-3d) is ONE rotateY animation that carries them all along the arc, so
-     the strips never drift apart. Transform-only (compositor). JS only sizes the loop (ResizeObserver) and hands a tile its next photo each
-     time it wraps off-screen. Switch off: add the `hidden` attribute to <div id="gband">; remove completely: delete that div, the .gband CSS
-     and this block. */
-  (function(){
-    var band=$('#gband'), stage=band&&$('.gband__stage',band);
-    if(!band||band.hidden) return;
-    if(!window.ResizeObserver||!(window.CSS&&CSS.supports&&CSS.supports('container-type','size'))){ band.hidden=true; return }
-    var srcs=$$('#ggrid .gcard img').map(function(i){return i.getAttribute('src')});   // the gallery's own thumbnails, in order
-    if(srcs.length<2) return;
-
-    /* ── tune here ── */
-    var SPEED=5,       // seconds for the row to advance by one tile (per tile, so phone and ultrawide move at the same pace)
-        TILE=46,       // tile height, % of the band's height
-        ASPECT=4/3,    // tile width ÷ height. The photos are mostly portrait, so 4:3 keeps more of each than the original 16:9
-        GAP=8,         // space between tiles, % of a tile's height
-        AXIS=50,       // vertical centre of the row, % of the band's height
-        CURVE=80,      // how far (degrees, 5–85) the row has bent round by the band's edge; higher curls the ends harder toward you
-        SLICES=16,     // strips per tile: each a few degrees of arc, too little to read as a facet
-        CAMERA=1.6,    // camera distance as a multiple of the cylinder's radius (just past the axis, so the ends swell)
-        MAX_WIDTH=55;  // a tile is never wider than this % of the band, so a phone still shows its neighbours
-
-    var bend=Math.min(85,Math.max(5,CURVE))*Math.PI/180, share=ASPECT/SLICES, cols=0, tiles=[], L=null, armed=false;
-    // Cylinder radius as a share of the band's width that puts the edge `b` radians round the arc as seen through the camera.
-    function arc(b){ return (CAMERA-1+Math.cos(b))/(2*CAMERA*Math.sin(b)) }
-    var radius=(+(100*arc(bend)).toFixed(3))+'cqw';
-    function deg(rad){ return rad*180/Math.PI }
-    function rd(n){ return +n.toFixed(4) }
-    function u(n){ return 'calc('+rd(n)+' * var(--gb-u))' }                      // n tile-heights
-    function turn(a){ return 'translateZ('+radius+') rotateY('+rd(a)+'deg) translateZ(-'+radius+')' }   // out to the axis, round it, back in
-
-    // Lays the loop on the cylinder. Angles in degrees: `unit` is the arc one tile-height spans, `limit` how far round a tile's centre can go
-    // before the whole tile is off-screen, `sweep` how far round the loop's ends sit (past `limit`, so a tile only ever wraps out of sight).
-    function measure(w,h){
-      var th=Math.min(TILE/100*h, MAX_WIDTH/100*w/ASPECT), rad=w*arc(bend);
-      if(!(th>0)||!(rad>0)) return {columns:2,sweep:0,unit:0,limit:0};
-      var unit=deg(th/rad), pitch=(ASPECT+GAP/100)*unit, limit=deg(bend)+ASPECT*unit/2,
-          columns=Math.min(60,Math.max(2,Math.ceil(2*limit/pitch))), sweep=rd(columns*pitch/2);
-      return {columns:columns,sweep:sweep,unit:rd(unit),limit:rd(Math.min(sweep,limit))};
-    }
-    var kf=d.createElement('style'); d.head.appendChild(kf);
-    function keyframes(m){   // beyond `limit` a tile is wholly off-screen, so it is hidden there (covers the wrap and tiles swinging behind the camera)
-      var hide=+(((m.sweep-m.limit)/(2*m.sweep||1))*100).toFixed(4);
-      return '@keyframes gband-orbit{from{transform:'+turn(-m.sweep)+'}to{transform:'+turn(m.sweep)+'}'+
-        '0%,'+hide+'%,'+(100-hide)+'%,100%{visibility:hidden}'+
-        (hide+.001)+'%,'+(100-hide-.001)+'%{visibility:visible}}';
-    }
-    band.style.setProperty('--gb-u','min('+TILE+'cqh,'+rd(MAX_WIDTH/ASPECT)+'cqw)');   // one tile-height, in container units
-    stage.style.perspective=rd(100*arc(bend)*CAMERA)+'cqw';                          // shared vanishing point on the row's centre line
-    stage.style.perspectiveOrigin='50% '+AXIS+'%';
-
-    function setImage(rec,i){
-      if(!armed) return;
-      rec.i=i; var src=srcs[i%srcs.length];
-      rec.imgs.forEach(function(im){ if(im.getAttribute('src')!==src) im.src=src });
-    }
-    function makeTile(t,n){
-      var el=d.createElement('div'), rec={el:el,strips:[],imgs:[],first:n-1-t,i:n-1-t};   // tile n-1 starts nearest the exit, tile 0 furthest back
-      el.className='gband__tile';
-      el.style.cssText='left:calc(50% - '+u(ASPECT/2)+');top:calc('+AXIS+'% - '+u(.5)+');width:'+u(ASPECT)+';height:'+u(1)+';animation-delay:'+(-t*SPEED)+'s';
-      for(var k=0;k<SLICES;k++){
-        var s=d.createElement('div'), im=d.createElement('img');
-        s.className='gband__strip';
-        // a pixel wider than its share so neighbouring facets overlap and no hairline opens between them (the last has no neighbour to cover)
-        s.style.cssText='left:'+u((ASPECT-share)/2)+';width:'+(k===SLICES-1?u(share):'calc('+u(share)+' + 1px)')+';height:'+u(1);
-        im.alt=''; im.draggable=false; im.decoding='async';
-        im.style.cssText='left:'+u(-k*share)+';width:'+u(ASPECT)+';height:'+u(1);
-        s.appendChild(im); el.appendChild(s); rec.strips.push(s); rec.imgs.push(im);
-      }
-      el.addEventListener('animationiteration',function(e){
-        if(e.target!==el) return;
-        setImage(rec,Math.round(e.elapsedTime/(cols*SPEED))*cols+rec.first);   // elapsedTime counts whole loops, missed events included
-      });
-      stage.appendChild(el); setImage(rec,rec.first);
-      return rec;
-    }
-    function apply(w,h){
-      var m=measure(w,h);
-      if(L&&L.columns===m.columns&&L.sweep===m.sweep&&L.unit===m.unit) return;
-      L=m;
-      if(m.columns!==cols){ cols=m.columns; stage.textContent=''; tiles=[]; for(var t=0;t<cols;t++) tiles.push(makeTile(t,cols)) }
-      kf.textContent=keyframes(m);
-      band.style.setProperty('--gb-dur',(cols*SPEED)+'s');
-      tiles.forEach(function(rec){ rec.strips.forEach(function(s,k){ s.style.transform=turn((ASPECT/2-(k+.5)*share)*m.unit) }) });
-      band.classList.add('is-ready');   // fades the row in once it has been measured, so a first paint laid out for the wrong size never shows
-    }
-    new ResizeObserver(function(es){ var r=es[0].contentRect; apply(r.width,r.height) }).observe(band);
-    // Run (and fetch the photos) only near the viewport: a tile picks up its next photo just before it comes back into view, too late to start loading it then.
-    new IntersectionObserver(function(es){
-      band.classList.toggle('is-off',!es[0].isIntersecting);
-      if(es[0].isIntersecting&&!armed){ armed=true; srcs.forEach(function(s){ new Image().src=s }); tiles.forEach(function(rec){ setImage(rec,rec.i) }) }
-    },{rootMargin:'300px 0px'}).observe(band);
   })();
 
   /* ── areas map: scroll straight past it; click (or tap) to move and zoom it, so it never traps the mouse wheel or a swipe ── */
